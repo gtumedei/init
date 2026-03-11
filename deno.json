@@ -1,12 +1,11 @@
 {
   "tasks": {
-    "start": "deno run -A src/main.ts",
-    "dev": "deno run --watch -A src/main.ts",
+    "start": "deno run -A src/main.tsx",
+    "dev": "deno run --watch -A src/main.tsx",
     "check": "deno check -q; echo; deno lint -q"
   },
   "imports": {
     "@std/fmt": "jsr:@std/fmt@^1.0.9",
-    "@std/path": "jsr:@std/path@^1.1.4",
     "hono": "npm:hono@^4.11.9",
     "jszip": "npm:jszip@^3.10.1",
     "~/": "./src/"

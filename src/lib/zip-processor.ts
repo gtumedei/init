@@ -1,64 +1,34 @@
 import JSZip from "jszip"
 import { buildProjectNamePlaceholders, replacePlaceholders } from "~/lib/casing.ts"
 
-const TEXT_EXTENSIONS = new Set([
-  "txt",
-  "md",
-  "json",
-  "jsonc",
-  "yaml",
-  "yml",
-  "toml",
-  "xml",
-  "html",
-  "css",
-  "scss",
-  "sass",
-  "js",
-  "jsx",
-  "ts",
-  "tsx",
-  "java",
-  "kt",
-  "kts",
-  "gradle",
-  "properties",
-  "gitignore",
-  "env",
-  "sh",
-  "sql",
-  "csv",
-  "go",
-  "rs",
-  "py",
-  "rb",
-  "php",
-  "swift",
-  "c",
-  "h",
-  "cpp",
-  "hpp",
-])
-
-const getFileExtension = (path: string): string => {
-  const fileName = path.split("/").pop() ?? ""
-  const lastDot = fileName.lastIndexOf(".")
-  if (lastDot === -1) return fileName.toLowerCase()
-  return fileName.slice(lastDot + 1).toLowerCase()
-}
-
 const looksLikeTextContent = (bytes: Uint8Array): boolean => {
-  const sampleSize = Math.min(bytes.length, 2048)
+  if (bytes.length === 0) return true
+
+  const sampleSize = Math.min(bytes.length, 4096)
   for (let i = 0; i < sampleSize; i += 1) {
     if (bytes[i] === 0) return false
   }
-  return true
-}
 
-const shouldTreatAsText = (path: string, bytes: Uint8Array): boolean => {
-  const extension = getFileExtension(path)
-  if (TEXT_EXTENSIONS.has(extension)) return true
-  return looksLikeTextContent(bytes)
+  try {
+    const sampleText = new TextDecoder("utf-8", { fatal: true }).decode(
+      bytes.subarray(0, sampleSize),
+    )
+    let suspiciousControlCount = 0
+    for (const char of sampleText) {
+      const code = char.charCodeAt(0)
+      const isControl =
+        (code >= 0x00 && code <= 0x08) ||
+        code === 0x0b ||
+        code === 0x0c ||
+        (code >= 0x0e && code <= 0x1f) ||
+        code === 0x7f
+      if (isControl) suspiciousControlCount += 1
+    }
+    const suspiciousRatio = suspiciousControlCount / sampleText.length
+    return suspiciousRatio < 0.05
+  } catch {
+    return false
+  }
 }
 
 export const buildGeneratedTemplateZip = async (
@@ -81,7 +51,7 @@ export const buildGeneratedTemplateZip = async (
 
     const fileBytes = await entry.async("uint8array")
 
-    if (!shouldTreatAsText(entryName, fileBytes)) {
+    if (!looksLikeTextContent(fileBytes)) {
       outputZip.file(replacedEntryName, fileBytes, {
         binary: true,
         date: entry.date,
