@@ -1,0 +1,23 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@std/fmt@^1.0.9": "1.0.9",
+    "npm:hono@^4.11.9": "4.11.9"
+  },
+  "jsr": {
+    "@std/fmt@1.0.9": {
+      "integrity": "2487343e8899fb2be5d0e3d35013e54477ada198854e52dd05ed0422eddcabe0"
+    }
+  },
+  "npm": {
+    "hono@4.11.9": {
+      "integrity": "sha512-Eaw2YTGM6WOxA6CXbckaEvslr2Ne4NFsKrvc0v97JD5awbmeBLO5w9Ho9L9kmKonrwF9RJlW6BxT1PVv/agBHQ=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/fmt@^1.0.9",
+      "npm:hono@^4.11.9"
+    ]
+  }
+}
