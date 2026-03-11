@@ -1,8 +1,7 @@
 /** @jsxImportSource hono/jsx */
 
+import { css, Style } from "hono/css"
 import { FC } from "hono/jsx"
-
-const css = (s: TemplateStringsArray) => s
 
 export const TemplateFormPage: FC<{ templateName: string }> = ({ templateName }) => {
   return (
@@ -20,7 +19,7 @@ export const TemplateFormPage: FC<{ templateName: string }> = ({ templateName })
           rel="stylesheet"
         />
 
-        <style>{css`
+        <Style>{css`
           html {
             box-sizing: border-box;
             font-size: 16px;
@@ -106,7 +105,7 @@ export const TemplateFormPage: FC<{ templateName: string }> = ({ templateName })
             font-weight: 600;
             cursor: pointer;
           }
-        `}</style>
+        `}</Style>
       </head>
       <body>
         <main>
