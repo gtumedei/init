@@ -16,7 +16,7 @@ app.use(logger())
 app.use(cors())
 
 app.get("/", (c) => {
-  return c.text("Hello Hono!")
+  return c.redirect("/compose-android")
 })
 
 app.use("/templates/*", serveStatic({ root: "./public" }))
