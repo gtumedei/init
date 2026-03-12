@@ -40,6 +40,7 @@ export const TemplateFormPage: FC<{ templateName: string }> = ({ templateName })
             color: #111827;
             flex-grow: 1;
             display: flex;
+            flex-direction: column;
           }
 
           main {
@@ -105,6 +106,23 @@ export const TemplateFormPage: FC<{ templateName: string }> = ({ templateName })
             font-weight: 600;
             cursor: pointer;
           }
+
+          .footer {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            margin-top: auto;
+            padding-inline: 1.5rem;
+            padding-bottom: 1.5rem;
+
+            a {
+              color: #737373;
+
+              &:hover {
+                color: #a855f7;
+              }
+            }
+          }
         `}</Style>
       </head>
       <body>
@@ -128,6 +146,13 @@ export const TemplateFormPage: FC<{ templateName: string }> = ({ templateName })
             </form>
           </section>
         </main>
+        <footer class="footer">
+          <small>
+            <a href="https://github.com/gtumedei/init" target="_blank">
+              Source code
+            </a>
+          </small>
+        </footer>
       </body>
     </html>
   )
