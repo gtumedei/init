@@ -5,6 +5,8 @@ Create starter projects from a template. Currently supports Android Jetpack Comp
 ## TODO
 
 - [ ] Add index route with a list of all templates
-- [ ] Add more parameters per template: `slug`, `title`, `description`, `buttonColor`, ...
+- [x] Add more parameters per template: `slug`, `title`, `description`, `buttonColor`, ...
+- [x] Add template aliases
 - [ ] Add a route where users can upload a zip and create a template from it
-- [ ] Rename the `compose-android` template to something like `compose-android-map2526`
+- [x] Rename the `compose-android` template to something like `compose-android-map2526`
+- [x] Dark mode support

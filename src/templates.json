@@ -1,0 +1,9 @@
+{
+  "compose-android": {
+    "alias": "compose-android-map2526"
+  },
+  "compose-android-map2526": {
+    "title": "Compose Android MAP2526",
+    "description": "Native Kotlin + Jetpack Compose template for the course of Mobile Application Programming (Bachelor in Computer Science and Engineering, A.A. 2025-2026, University of Bologna)."
+  }
+}

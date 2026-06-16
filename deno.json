@@ -1,13 +1,19 @@
 {
   "tasks": {
     "start": "deno run -A src/main.tsx",
-    "dev": "deno run --watch -A src/main.tsx",
+    "dev": "deno run --watch -A src/main.tsx & deno run tailwind",
+    "tailwind": "deno run -A @tailwindcss/cli -i ./src/global.css -o ./public/global.css --watch",
     "check": "deno check -q; echo; deno lint -q"
   },
   "imports": {
     "@std/fmt": "jsr:@std/fmt@^1.0.9",
+    "@tailwindcss/cli": "npm:@tailwindcss/cli@^4.2.1",
+    "@tailwindcss/forms": "npm:@tailwindcss/forms@^0.5.11",
     "hono": "npm:hono@^4.11.9",
     "jszip": "npm:jszip@^3.10.1",
+    "tailwindcss": "npm:tailwindcss@^4.2.1",
+    "zod": "npm:zod@^4.3.6",
     "~/": "./src/"
-  }
+  },
+  "nodeModulesDir": "auto"
 }
